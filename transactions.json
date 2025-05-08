@@ -1,1 +1,8 @@
-[]
+[    {
+        "type": "income",
+        "amount": 2.0,
+        "source": "3",
+        "note": "annen",
+        "date": "2025-05-08 20:18:29"
+    }
+]
