@@ -5,20 +5,15 @@ DATA_PATH = os.path.join("data", "transactions.json")
 
 def list_transactions():
     if not os.path.exists(DATA_PATH):
-        print("Henüz kayıtlı bir işlem bulunmamaktadır.")
+        print("Henüz hiç işlem yok.")
         return
 
     with open(DATA_PATH, "r") as f:
-        data = json.load(f)
+        transactions = json.load(f)
 
-    if not data:
-        print("Kayıtlı işlem bulunmamaktadır.")
+    if not transactions:
+        print("Henüz hiç işlem yok.")
         return
 
-    print("\n📋 Tüm İşlemler:")
-    print("-" * 40)
-    for i, item in enumerate(data, 1):
-        print(f"{i}. [{item['type'].upper()}] {item['amount']}₺ - {item.get('category', item.get('source', ''))}")
-        print(f"   Not: {item['note']}")
-        print(f"   Tarih: {item['date']}")
-        print("-" * 40)
+    for i, t in enumerate(transactions, 1):
+        print(f"{i}. [{t['type']}] {t['amount']}₺ - {t.get('source', t.get('category', ''))} - {t['note']} - {t['date']}")

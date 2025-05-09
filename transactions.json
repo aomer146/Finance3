@@ -1,8 +1,9 @@
-[    {
-        "type": "income",
-        "amount": 2.0,
-        "source": "3",
-        "note": "annen",
-        "date": "2025-05-08 20:18:29"
+[
+    {
+        "type": "expense",
+        "amount": 15000.0,
+        "category": "depozito",
+        "note": "expensive",
+        "date": "2025-05-08 20:46:19"
     }
 ]
