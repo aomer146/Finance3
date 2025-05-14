@@ -1,16 +1,1 @@
-[
-    {
-        "type": "income",
-        "amount": 150.0,
-        "source": "kara para",
-        "note": "yok",
-        "date": "2025-05-11 03:12:52"
-    },
-    {
-        "type": "income",
-        "amount": 185.0,
-        "source": "e\u011fitim",
-        "note": "",
-        "date": "2025-05-11 03:28:19"
-    }
-]
+[]

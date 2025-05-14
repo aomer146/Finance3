@@ -1,52 +1,46 @@
-from kullanici import kullanici_ekle, giris_yap
-from kategori import kategori_ekle, kategorileri_getir
-from islem import islem_ekle, islemleri_getir
-from tarih_filtrele import islemleri_tarihe_gore_getir
-
-def menu():
-    print("\n1. Kullanıcı Ekle")
-    print("2. Giriş Yap")
-    print("3. Kategori Ekle")
-    print("4. İşlem Ekle")
-    print("5. Tüm İşlemleri Listele")
-    print("6. Tarihe Göre Filtrele")
-    print("0. Çıkış")
+from modules.add_income import add_income
+from modules.add_expense import add_expense
+from modules.list_transactions import list_transactions
+from modules.calculate_totals import calculate_totals
+from modules.filter_transactions import filter_transactions
+from modules.filter_by_date import filter_by_date
 
 def main():
-    while True:
-        menu()
-        secim = input("Seçiminiz: ")
-        if secim == "1":
-            username = input("Kullanıcı adı: ")
-            password = input("Şifre: ")
-            kullanici_ekle(username, password)
-        elif secim == "2":
-            username = input("Kullanıcı adı: ")
-            password = input("Şifre: ")
-            user = giris_yap(username, password)
-            print("Giriş başarılı." if user else "Hatalı giriş.")
-        elif secim == "3":
-            ad = input("Kategori adı: ")
-            kategori_ekle(ad)
-        elif secim == "4":
-            user_id = int(input("Kullanıcı ID: "))
-            category_id = int(input("Kategori ID: "))
-            amount = float(input("Tutar: "))
-            date = input("Tarih (YYYY-MM-DD): ")
-            desc = input("Açıklama: ")
-            islem_ekle(user_id, category_id, amount, date, desc)
-        elif secim == "5":
-            for i in islemleri_getir():
-                print(dict(i))
-        elif secim == "6":
+    print("1. Gelir ekle")
+    print("2. Gider ekle")
+    print("3. Tüm işlemleri listele")
+    print("4. Toplam gelir ve giderleri göster")
+    print("5. Kategoriye göre filtrele")
+    print("6. Tarih aralığına göre işlemleri listele")
+
+    choice = input("Seçiminizi girin (1/2/3/4/5/6): ")
+
+    try:
+        if choice in ["1", "2"]:
+            amount = float(input("Miktarı girin: "))
+            note = input("Not (isteğe bağlı): ")
+
+        if choice == "1":
+            source = input("Gelirin kaynağını girin: ")
+            add_income(amount, source, note)
+        elif choice == "2":
+            category = input("Giderin kategorisini girin: ")
+            add_expense(amount, category, note)
+        elif choice == "3":
+            list_transactions()
+        elif choice == "4":
+            calculate_totals()
+        elif choice == "5":
+            keyword = input("Filtrelemek istediğiniz kelimeyi girin (kategori/kaynak/not): ")
+            filter_transactions(keyword)
+        elif choice == "6":
             start = input("Başlangıç tarihi (YYYY-MM-DD): ")
             end = input("Bitiş tarihi (YYYY-MM-DD): ")
-            for i in islemleri_tarihe_gore_getir(start, end):
-                print(dict(i))
-        elif secim == "0":
-            break
+            filter_by_date(start, end)
         else:
-            print("Geçersiz seçim.")
+            print("❌ Geçersiz seçim.")
+    except ValueError:
+        print("❌ Lütfen geçerli bir sayı girin.")
 
 if __name__ == "__main__":
     main()
