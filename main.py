@@ -4,6 +4,8 @@ from modules.list_transactions import list_transactions
 from modules.calculate_totals import calculate_totals
 from modules.filter_transactions import filter_transactions
 from modules.filter_by_date import filter_by_date
+from modules.delete_transaction import delete_transaction
+from modules.update_transaction import update_transaction
 
 def main():
     print("1. Gelir ekle")
@@ -12,8 +14,10 @@ def main():
     print("4. Toplam gelir ve giderleri göster")
     print("5. Kategoriye göre filtrele")
     print("6. Tarih aralığına göre işlemleri listele")
+    print("7. İşlem sil")
+    print("8. İşlem güncelle")
 
-    choice = input("Seçiminizi girin (1/2/3/4/5/6): ")
+    choice = input("Seçiminizi girin (1/2/3/4/5/6/7/8): ")
 
     try:
         if choice in ["1", "2"]:
@@ -37,6 +41,14 @@ def main():
             start = input("Başlangıç tarihi (YYYY-MM-DD): ")
             end = input("Bitiş tarihi (YYYY-MM-DD): ")
             filter_by_date(start, end)
+        elif choice == "7":
+            index = int(input("Silmek istediğiniz işlemin sıra numarasını girin (1'den başlar): ")) - 1
+            delete_transaction(index)
+        elif choice == "8":
+            index = int(input("Güncellemek istediğiniz işlemin sıra numarasını girin (1'den başlar): ")) - 1
+            new_amount = float(input("Yeni miktarı girin: "))
+            new_note = input("Yeni not (boş bırakmak için Enter): ")
+            update_transaction(index, new_amount, new_note if new_note else None)
         else:
             print("❌ Geçersiz seçim.")
     except ValueError:
