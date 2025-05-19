@@ -6,6 +6,7 @@ from modules.filter_transactions import filter_transactions
 from modules.filter_by_date import filter_by_date
 from modules.delete_transaction import delete_transaction
 from modules.update_transaction import update_transaction
+from modules.export_to_csv import export_to_csv
 
 def main():
     print("1. Gelir ekle")
@@ -16,8 +17,9 @@ def main():
     print("6. Tarih aralığına göre işlemleri listele")
     print("7. İşlem sil")
     print("8. İşlem güncelle")
+    print("9. CSV olarak dışa aktar")
 
-    choice = input("Seçiminizi girin (1/2/3/4/5/6/7/8): ")
+    choice = input("Seçiminizi girin (1-9): ")
 
     try:
         if choice in ["1", "2"]:
@@ -49,6 +51,8 @@ def main():
             new_amount = float(input("Yeni miktarı girin: "))
             new_note = input("Yeni not (boş bırakmak için Enter): ")
             update_transaction(index, new_amount, new_note if new_note else None)
+        elif choice == "9":
+            export_to_csv()
         else:
             print("❌ Geçersiz seçim.")
     except ValueError:
