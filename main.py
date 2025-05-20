@@ -1,3 +1,4 @@
+from modules.login import login
 from modules.add_income import add_income
 from modules.add_expense import add_expense
 from modules.list_transactions import list_transactions
@@ -10,6 +11,9 @@ from modules.export_to_csv import export_to_csv
 from modules.summarize_by_category import summarize_by_category
 
 def main():
+    if not login():
+        return
+
     print("1. Gelir ekle")
     print("2. Gider ekle")
     print("3. Tüm işlemleri listele")
@@ -44,10 +48,10 @@ def main():
             end = input("Bitiş tarihi (YYYY-MM-DD): ")
             filter_by_date(start, end)
         elif choice == "7":
-            index = int(input("Silmek istediğiniz işlemin sıra numarasını girin: ")) - 1
+            index = int(input("Silmek istediğiniz işlemin sıra numarasını girin (1'den başlar): ")) - 1
             delete_transaction(index)
         elif choice == "8":
-            index = int(input("Güncellemek istediğiniz işlemin sıra numarasını girin: ")) - 1
+            index = int(input("Güncellemek istediğiniz işlemin sıra numarasını girin (1'den başlar): ")) - 1
             new_amount = float(input("Yeni miktarı girin: "))
             new_note = input("Yeni not (boş bırakmak için Enter): ")
             update_transaction(index, new_amount, new_note if new_note else None)
